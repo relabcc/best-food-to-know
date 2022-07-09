@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Flex } from '@chakra-ui/react'
 
-import Link from '../components/Link'
+import Link from 'components/Link'
 
 const Header = ({ title, pathname, ...props }) => {
   return (

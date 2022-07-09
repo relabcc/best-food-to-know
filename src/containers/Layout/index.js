@@ -14,16 +14,23 @@ const Layout = ({ children, location: { pathname } }) => {
         query SiteTitleQuery {
           site {
             siteMetadata {
+              siteUrl
+            }
+          }
+          wp {
+            generalSettings {
               title
               description
-              siteUrl
             }
           }
         }
       `}
       render={({
         site: {
-          siteMetadata: { title, description, siteUrl },
+          siteMetadata: { siteUrl },
+        },
+        wp: {
+          generalSettings: { title, description },
         },
       }) => {
         return (
@@ -59,7 +66,6 @@ const Layout = ({ children, location: { pathname } }) => {
               <meta property="og:url" content={siteUrl} />
               <meta property="og:title" content={title} />
               <meta property="og:description" content={description} />
-              <meta property="og:image" content={`${siteUrl}/fb.jpg`} />
             </Helmet>
             <Header pathname={pathname} title={title} />
             <Box as="main" pt={'var(--chakra-sizes-header)'}>

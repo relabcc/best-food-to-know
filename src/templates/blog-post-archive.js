@@ -1,10 +1,10 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
-import Seo from "../containers/Seo"
-import PostArchive from "../containers/PostArchive"
-import { responsive } from "../contexts/responsive"
 import { Container } from "@chakra-ui/react"
+
+import Seo from "containers/Seo"
+import PostArchive from "containers/PostArchive"
+import { responsive } from "contexts/responsive"
 
 const BlogIndex = ({
   data,
@@ -15,7 +15,7 @@ const BlogIndex = ({
   if (!posts.length) {
     return (
       <Container py="2em">
-        <Seo title="特輯列表" />
+        <Seo />
         <p>
           目前沒有文章喔
         </p>
@@ -25,8 +25,8 @@ const BlogIndex = ({
 
   return (
     <>
-      <Seo title="特輯列表" />
-      <Container my={responsive('2em', '4em')} fontSize="1rem">
+      <Seo />
+      <Container my={responsive('2em', '4em')}>
         <PostArchive posts={posts} />
 
         {previousPagePath && (

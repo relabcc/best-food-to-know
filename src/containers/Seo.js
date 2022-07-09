@@ -5,29 +5,34 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
- import React from "react"
- import PropTypes from "prop-types"
- import { Helmet } from "react-helmet"
- import { useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
+import { useStaticQuery, graphql } from 'gatsby'
 
- const Seo = ({ description, lang, meta, title, ogImage, uri }) => {
-   const { site } = useStaticQuery(
-     graphql`
-       query {
+const Seo = ({ description, lang, meta, title, ogImage, uri = '' }) => {
+  const { site, wp } = useStaticQuery(
+    graphql`
+      query {
         site {
           siteMetadata {
-            title
-            description
             siteUrl
           }
         }
-       }
-     `
-   )
+        wp {
+          generalSettings {
+            title
+            description
+          }
+        }
+      }
+    `
+  )
 
-   const metaDescription = description || site.siteMetadata?.description
-   const defaultTitle = site.siteMetadata?.title
-   const defaultMeta = [
+  const metaDescription = description || wp.generalSettings?.description
+  const pageTitle = title || wp.generalSettings?.title
+  const defaultTitle = pageTitle === wp.generalSettings?.title ? '' : wp.generalSettings?.title
+  const defaultMeta = [
     {
       name: `description`,
       content: metaDescription,
@@ -38,7 +43,7 @@
     },
     {
       property: `og:title`,
-      content: title,
+      content: pageTitle,
     },
     {
       property: `og:description`,
@@ -54,7 +59,7 @@
     },
     {
       name: `twitter:title`,
-      content: title,
+      content: pageTitle,
     },
     {
       name: `twitter:description`,
@@ -65,32 +70,32 @@
     defaultMeta.push({
       property: `og:image`,
       content: site.siteMetadata?.siteUrl + ogImage,
-    },)
+    })
   }
 
-   return (
-     <Helmet
-       htmlAttributes={{
-         lang,
-       }}
-       title={title}
-       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-       meta={defaultMeta.concat(meta)}
-     />
-   )
- }
+  return (
+    <Helmet
+      htmlAttributes={{
+        lang,
+      }}
+      title={pageTitle}
+      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      meta={defaultMeta.concat(meta)}
+    />
+  )
+}
 
- Seo.defaultProps = {
-   lang: `zh-Hant-TW`,
-   meta: [],
-   description: ``,
- }
+Seo.defaultProps = {
+  lang: `zh-Hant-TW`,
+  meta: [],
+  description: ``,
+}
 
- Seo.propTypes = {
-   description: PropTypes.string,
-   lang: PropTypes.string,
-   meta: PropTypes.arrayOf(PropTypes.object),
-   title: PropTypes.string.isRequired,
- }
+Seo.propTypes = {
+  description: PropTypes.string,
+  lang: PropTypes.string,
+  meta: PropTypes.arrayOf(PropTypes.object),
+  title: PropTypes.string.isRequired,
+}
 
- export default Seo
+export default Seo

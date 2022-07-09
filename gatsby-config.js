@@ -2,14 +2,9 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const hostname = 'relab.cc';
-// const pathPrefix = 'styled-gatsby-starter-2';
-
 module.exports = {
   siteMetadata: {
-    title: 'Best Food To Know',
-    description: 'Best Food To Know',
-    siteUrl: `https://${hostname}`,
+    siteUrl: process.env.HOME_URL,
   },
   trailingSlash: "always",
   plugins: [

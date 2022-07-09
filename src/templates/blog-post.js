@@ -6,8 +6,9 @@ import { convert } from 'html-to-text'
 import styled from '@emotion/styled'
 import { getImage } from 'gatsby-plugin-image'
 
-import Seo from '../containers/Seo'
-import { responsive } from '../contexts/responsive'
+import Seo from 'containers/Seo'
+import { responsive } from 'contexts/responsive'
+import Link from 'components/Link'
 
 const StyledHTML = styled(Box)`
   --wp--preset--color--black: #000000;
@@ -313,34 +314,34 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         {/* <Text>發布日期：{post.date}</Text> */}
       </article>
 
-      {/* <Box className="blog-post-nav" mt="2em">
-          <ul
-            style={{
-              display: `flex`,
-              flexWrap: `wrap`,
-              justifyContent: `space-between`,
-              listStyle: `none`,
-              padding: 0,
-              margin: 0,
-            }}
-          >
-            <li>
-              {previous && (
-                <Link to={previous.uri} rel="prev">
-                  ← {parse(previous.title)}
-                </Link>
-              )}
-            </li>
+      <Box className="blog-post-nav" mt="2em">
+        <ul
+          style={{
+            display: `flex`,
+            flexWrap: `wrap`,
+            justifyContent: `space-between`,
+            listStyle: `none`,
+            padding: 0,
+            margin: 0,
+          }}
+        >
+          <li>
+            {previous && (
+              <Link to={previous.uri} rel="prev">
+                ← {parse(previous.title)}
+              </Link>
+            )}
+          </li>
 
-            <li>
-              {next && (
-                <Link to={next.uri} rel="next">
-                  {parse(next.title)} →
-                </Link>
-              )}
-            </li>
-          </ul>
-        </Box> */}
+          <li>
+            {next && (
+              <Link to={next.uri} rel="next">
+                {parse(next.title)} →
+              </Link>
+            )}
+          </li>
+        </ul>
+      </Box>
     </Container>
   )
 }

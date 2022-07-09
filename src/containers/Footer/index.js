@@ -1,8 +1,8 @@
 import React from 'react'
 import format from 'date-fns/format'
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react'
 
-import { responsive } from '../../contexts/responsive'
+import { responsive } from 'contexts/responsive'
 
 const Footer = (props) => {
   return (
@@ -17,9 +17,9 @@ const Footer = (props) => {
       justifyContent={responsive('flex-start', 'space-between')}
       {...props}
     >
-      <Box>
-        <Text fontSize={responsive('0.75em', '1em')}>Copyright © {format(new Date(), 'yyyy')}. All rights reserved.</Text>
-      </Box>
+      <Text fontSize={responsive('0.75em', '1em')}>
+        Copyright © {format(new Date(), 'yyyy')}. All rights reserved.
+      </Text>
     </Flex>
   )
 }
