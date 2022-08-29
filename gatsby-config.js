@@ -56,7 +56,7 @@ module.exports = {
         mergeStyleHashes: false, // you can disable styles sha256 hashes
         mergeDefaultDirectives: true,
         directives: {
-          "script-src": "'self' https://*.googletagmanager.com",
+          "script-src": "'self' 'sha256-oaFx7Djcy5UNEYTupAtgdozax9PrPk0i1RK0PwllMbY=' https://*.googletagmanager.com",
           "style-src": "'self' 'unsafe-inline'",
           "img-src": "'self' data: https://*.google-analytics.com https://*.googletagmanager.com",
           "connect-src": "'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com"
